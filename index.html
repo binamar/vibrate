@@ -1,0 +1,12 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>اهتزاز</title>
+<style>body{margin:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;font:18px system-ui;background:#fff;color:#111}button{font:inherit;border:2px solid #111;background:#fff;color:#111;border-radius:0}#b{width:200px;height:200px}#b.on{background:#111;color:#fff}#l{display:flex;gap:8px}#l button{padding:10px 16px}#l .a{background:#111;color:#fff}</style></head><body>
+<button id="b">تشغيل</button><div id="l"></div><p id="e"></p>
+<script>
+const L=[["ضعيف",30,170],["متوسط",100,100],["قوي",250,10]],b=document.getElementById("b");let t,s=1;
+const go=()=>navigator.vibrate(L[s][1]);
+const stop=()=>{clearInterval(t);t=0;navigator.vibrate(0);b.className="";b.textContent="تشغيل"};
+const run=()=>{go();t=setInterval(go,L[s][1]+L[s][2]);b.className="on";b.textContent="إيقاف"};
+L.forEach((x,i)=>{const c=document.createElement("button");c.textContent=x[0];c.className=i==s?"a":"";c.onclick=()=>{s=i;[...l.children].forEach((k,j)=>k.className=j==i?"a":"");if(t){stop();run()}};l.append(c)});
+b.onclick=()=>t?stop():run();
+if(!navigator.vibrate)e.textContent="الاهتزاز غير مدعوم هنا (يعمل على أندرويد/كروم)";
+</script></body></html>
